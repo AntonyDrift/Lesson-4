@@ -77,18 +77,20 @@ class Bank {
         } while (key != 9);
     }
 
-    boolean checkValue(int c) {
-        if ((key % 100 % 50 % 20 == 0) || (key % 100 % 20 == 0) ||
-                (key % 50 % 20 == 0) || (key % 50 == 0) || (key % 20 == 0)) {return true}
-                else false
-    }
+
+
+
 
     private void takeMoney() {
 
         System.out.println("Enter the required amount of money");
         key = scan.nextInt();
         Bank xMenu = new Bank();
-        xMenu.checkValue(key);
+
+        if ((key % 100 % 50 % 20 == 0) || (key % 100 % 20 == 0) ||
+                (key % 50 % 20 == 0) || (key % 50 == 0) || (key % 20 == 0)) {
+            System.out.println("good");
+
         {
 
 
