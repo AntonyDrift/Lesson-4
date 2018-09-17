@@ -145,7 +145,7 @@ class Bank {
             this.n100 -= res100;
             mainMenu();
 
-        } else System.out.println("Wrong amount of money. Restart ATM");
+        } else System.out.println("Wrong amount of money!");
         mainMenu();
     }
 
@@ -170,8 +170,7 @@ class Bank {
                     res20 = (mod50 * 5 / 2);
 
                 } else {
-                    System.out.println("");
-                    checkMoney();
+                    System.out.println("Wrong amount of money. Restart ATM");
                 }
             }
         }
@@ -286,9 +285,7 @@ class Bank {
                     }
                 }
             }
-            System.out.println("n20 " + res20 + " n50 " + res50 + " n100 " + res100);
             modX20 = compX100 % 100;
-            System.out.println(modX20);
             res50 += 1;
             if (res50 <= n50) {
                 res20 += modX20 / 20;
@@ -310,15 +307,17 @@ class Bank {
                 res20 += 5;
                 if (res20 <= n20) {
                     res50 -= 2;
-
                     res20 += modX20 / 20;
-                    System.out.println(res20);
+
                     if (res20 <= n20) {
                         res20 = res20;
+
                     } else {
                         res50 += 2;
+
                         if (res50 <= n50) {
                             res20 -= 5;
+
                         } else {
                             System.out.println("Wrong amount of money. Restart ATM");
                         }
