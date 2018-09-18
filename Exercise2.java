@@ -18,6 +18,15 @@ class Bank {
     int modX100, modX50, modX20;
     int comp100, comp50, comp20;
     int res100, res50, res20;
+    boolean check=true;
+
+    public boolean getCheck(){
+        return check;
+    }
+    public void setCheck(boolean check){
+        this.check=check;
+    }
+
     Scanner scan = new Scanner(System.in);
 
     public Bank(int n20, int n50, int n100) {
@@ -110,13 +119,12 @@ class Bank {
     }
 
     public void withdrawMoney() {
-
+        setCheck(true);
         System.out.println("Enter the requared amount of money");
         key = scan.nextInt();
         checkMoney();
 
         if (checkMoney() == true) {
-            System.out.println("********ATM********\nTRANSACTION SUCCESFULL!");
 
             if (key % 100 == 0) {
                 comp100 = key / 100;
@@ -133,9 +141,10 @@ class Bank {
                     checkN50();
 
                 } else {
-                    checkN20N50();
+                    checkN20N50(check);
                 }
             }
+            if (getCheck()==true){ System.out.println("********ATM********\nTRANSACTION SUCCESFULL!");
             int sumTransaction=0;
             sumTransaction+=res20*20+res50*50+res100*100;
             System.out.println("Amount of money: " + sumTransaction + " dollars\n20 dollars: " + res20 + "\n50 dollars: " + res50 + " \n100 dollars: " + res100);
@@ -143,7 +152,7 @@ class Bank {
             this.n20 -= res20;
             this.n50 -= res50;
             this.n100 -= res100;
-            mainMenu();
+            mainMenu();}
 
         } else System.out.println("Wrong amount of money!");
         mainMenu();
@@ -169,7 +178,7 @@ class Bank {
                 if (comp20 <= n20) {
                     res20 = (mod50 * 5 / 2);
 
-                } else {
+                } else {setCheck(false);
                     System.out.println("Wrong amount of money. Restart ATM");
                 }
             }
@@ -196,7 +205,7 @@ class Bank {
                 if (comp20 <= n20) {
                     res20 = (mod50 * 5 / 2);
 
-                } else {
+                } else {setCheck(false);
                     System.out.println("Wrong amount of money. Restart ATM");
                 }
             }
@@ -213,7 +222,8 @@ class Bank {
 
             if (res20 <= n20) {
                 res50 -= 2;
-            } else System.out.println("Wrong amount of money. Restart ATM");
+            } else {setCheck(false);
+            System.out.println("Wrong amount of money. Restart ATM");}
         }
     }
 
@@ -255,11 +265,12 @@ class Bank {
             if (res50 <= n50) {
                 res20 -= 5;
 
-            } else System.out.println("Wrong amount of money. Restart ATM");
+            } else {setCheck(false);
+            System.out.println("Wrong amount of money. Restart ATM");}
         }
     }
 
-    public void checkN20N50() {
+    public void checkN20N50(boolean check) {
         int compX100;
         if ((key - 50) % 20 == 0) {
             compX100 = key - 50;
@@ -280,7 +291,7 @@ class Bank {
 
                     if (comp20 <= n20) {
                         res20 = (mod50 * 5 / 2);
-                    } else {
+                    } else {setCheck(false);
                         System.out.println("Wrong amount of money. Restart ATM");
                     }
                 }
@@ -299,8 +310,8 @@ class Bank {
                     if (res50 <= n50) {
                         res20 -= 5;
 
-                    } else {
-                        System.out.println("Wrong amount of money. Restart ATM");
+                    } else {setCheck(false);
+                        System.out.println("Wrong amount of money. Restart ATM");return;
                     }
                 }
             } else {
@@ -318,15 +329,17 @@ class Bank {
                         if (res50 <= n50) {
                             res20 -= 5;
 
-                        } else {
+                        } else {setCheck(false);
                             System.out.println("Wrong amount of money. Restart ATM");
                         }
                     }
 
-                } else System.out.println("Wrong amount of money. Restart ATM");
+                } else {setCheck(false);
+                System.out.println("Wrong amount of money. Restart ATM");}
             }
 
-        } else System.out.println("Wrong amount of money. Restart ATM");
+        } else {setCheck(false);
+        System.out.println("Wrong amount of money. Restart ATM");}
     }
 
     public void checkBalance() {
